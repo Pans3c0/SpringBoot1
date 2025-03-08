@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 @Service
 public class BootcampersService {
-    private ArrayList<Bootcampers>bootcampers = new ArrayList<>();
+    private final ArrayList<Bootcampers>bootcampers = new ArrayList<>();
 
     public ArrayList<Bootcampers>getAll(){
         return bootcampers;

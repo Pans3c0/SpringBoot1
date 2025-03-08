@@ -1,12 +1,12 @@
 package org.educastur.samuelepv59.demo1.controllers;
 
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Response;
 import org.educastur.samuelepv59.demo1.models.Bootcampers;
 import org.educastur.samuelepv59.demo1.services.BootcampersService;
 import org.springframework.stereotype.Component;
 
+import java.net.URI;
 import java.util.ArrayList;
 
 @Component
@@ -26,5 +26,22 @@ public class BootcampersController {
     @Produces("aplication/json")
     public ArrayList<Bootcampers> listaTodos(){
         return bootcampersService.getAll();
+    }
+
+    @GET
+    @Path("bootcampers/{nombre}")
+    @Produces("aplication/json")
+    public Bootcampers listarUno(@PathParam("nombre") String nombre){
+        return bootcampersService.get(nombre);
+    }
+
+    @POST
+    @Path("/bootcampers")
+    @Produces("aplication/json")
+    @Consumes("aplication/json")
+    public Response introducirBootcamper(Bootcampers bootcampers){
+        bootcampersService.add(bootcampers);
+
+        return Response.created(URI.create("/bootcampers/"+bootcampers.getNombre())).build();
     }
 }

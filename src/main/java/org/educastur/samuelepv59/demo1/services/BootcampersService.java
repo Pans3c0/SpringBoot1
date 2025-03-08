@@ -16,4 +16,11 @@ public class BootcampersService {
     public void add (Bootcampers bootcamper){
         bootcampers.add(bootcamper);
     }
+
+    public Bootcampers get(String nombre){
+        for (Bootcampers b : bootcampers){
+            if (b.getNombre().equals(nombre))return b;
+        }
+        return null;
+    }
 }
